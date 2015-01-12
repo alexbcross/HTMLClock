@@ -1,0 +1,17 @@
+body {
+	background-color: purple;
+	color: white;
+}
+
+.title {
+	text-align: center;
+}
+
+#clock {
+	font-size: 1000%;
+	font-family: "Impact";
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
