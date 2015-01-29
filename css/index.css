@@ -1,17 +1,49 @@
 body {
-	background-color: purple;
 	color: white;
+}
+
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 20em;
+	max-height: 20em;
+	position: relative;
+	bottom: -100px;
+	-webkit-filter: invert(100%);
 }
 
 .title {
 	text-align: center;
 }
 
+.text {
+	text-align: center;
+}
+
+.cold {
+	background-color: #95A5A6
+}
+
+.chilly {
+	background-color: #1ABC9C
+}
+
+.nice {
+	background-color: #2980B9
+}
+
+.warm {
+	background-color: #E67E22
+}
+
+.hot {
+	background-color: #E74C3C
+}
+
+
 #clock {
-	font-size: 1000%;
+	font-size: 1500%;
 	font-family: "Impact";
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	text-align: center;
 }
