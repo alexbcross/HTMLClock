@@ -35,7 +35,7 @@ function getTemp(){
 	
 		$("#forecastLabel").html(json.daily.summary);
 		
-		imgSrc = imgSrc + json.daily.icon + ".svg";
+		imgSrc = imgSrc + json.currently.icon + ".svg";
 		$("#icon").attr('src', imgSrc);
 		
 		maxTemp = json.daily.data[0].temperatureMax;
@@ -68,4 +68,80 @@ function setColor(temp){
 function load(){
 	getTime();
 	getTemp();
+	getAllAlarms();
+}
+
+
+function showAlarmPopup(){
+	$("#mask").removeClass("hide");
+	$("#popup").removeClass("hide");
+}
+
+function hideAlarmPopup(){
+	$("#mask").addClass("hide");
+	$("#popup").addClass("hide");
+}
+
+function insertAlarm(time, alarmName){
+	$("#alarms").append(
+		$("<div>") .addClass("flexable")
+			.append(
+				$("<div>").addClass("name") .html(alarmName + "      "),
+				$("<div>").addClass("time") .html(time),
+				$("<button>Delete</button>").attr("id", alarmName)
+							.click(function() {
+								$(this).parent().remove(); 
+								blah(alarmName)
+							})
+			)
+		);
+		
+		
+}
+
+function addAlarm(){
+	var hours = $("#hours option:selected").text();
+	var mins = $("#mins option:selected").text();
+	var ampm = $("#ampm option:selected").text();
+	var alarmName = $("#alarmName").val();
+	
+	var time = hours + ":" + mins + " " + ampm;
+		
+	var AlarmObject = Parse.Object.extend("Alarm");
+    var alarmObject = new AlarmObject();
+      alarmObject.save({"time": time,"alarmName": alarmName}, {
+      success: function(object) {
+        insertAlarm(time, alarmName);
+		hideAlarmPopup();
+       }
+     });
+
+	
+}
+
+function getAllAlarms(){
+	Parse.initialize("iZl5gAf0XujK9MUmQG7s3Ishl0RjpBnFjKRhcPRt", "gfLcVKBvJ3uY0sIXYbBfF2wTQpx7rpVYyfRXVxNt");
+	
+	var AlarmObject = Parse.Object.extend("Alarm");
+    var query = new Parse.Query(AlarmObject);
+    query.find({
+        success: function(results) {
+          for (var i = 0; i < results.length; i++) { 
+            insertAlarm(results[i].get("time"), results[i].get("alarmName"));
+          }
+        }
+    });
+}
+
+function blah(alarmName){
+	var deleteObject = new Parse.Object.extend("Alarm");
+	var query = new Parse.Query(deleteObject);
+	query.equalTo("alarmName", alarmName);
+	query.find({
+		success: function(results) {
+			for(var i = 0; i < results.length; i++){
+				results[i].destroy();
+			}
+		}
+	})
 }

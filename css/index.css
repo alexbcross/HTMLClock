@@ -6,10 +6,10 @@ img {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	min-height: 20em;
-	max-height: 20em;
+	min-height: 15em;
+	max-height: 15em;
 	position: relative;
-	bottom: -100px;
+	bottom: -40px;
 	-webkit-filter: invert(100%);
 }
 
@@ -43,7 +43,7 @@ img {
 
 
 #clock {
-	font-size: 1500%;
+	font-size: 800%;
 	font-family: "Impact";
 	text-align: center;
 }
