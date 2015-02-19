@@ -22,11 +22,14 @@
         		<h2>Alarms</h2>
         		<input type="button" value="Add Alarm" class="button" onclick="showAlarmPopup()"/>
     		</div>
-    		<div id="alarms"></div>
+    		<div id="alarms">
+    			<div id="login">
+    				<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+    			</div>
+    		</div>
 		</div>
 
-		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
-		<div id="status"></div>
+		
 		<div id="fb-root"></div>
 		
 		
