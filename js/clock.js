@@ -106,6 +106,8 @@ function addAlarm(){
 	var mins = $("#mins option:selected").text();
 	var ampm = $("#ampm option:selected").text();
 	var alarmName = $("#alarmName").val();
+
+	ga('send', 'event', 'Alarm', 'Add');
 	
 	var time = hours + ":" + mins + " " + ampm;
 		
@@ -121,31 +123,15 @@ function addAlarm(){
 	
 }
 
-// function getAllAlarms(){
-// 	Parse.initialize("iZl5gAf0XujK9MUmQG7s3Ishl0RjpBnFjKRhcPRt", "gfLcVKBvJ3uY0sIXYbBfF2wTQpx7rpVYyfRXVxNt");
-	
-// 	var AlarmObject = Parse.Object.extend("Alarm");
-//     var query = new Parse.Query(AlarmObject);
-//     query.find({
-//         success: function(results) {
-//           for (var i = 0; i < results.length; i++) {
-//           	if(results[i].get("userid") == userid){ 
-//             	insertAlarm(results[i].get("time"), results[i].get("alarmName"));
-//            	}
-//           }
-//         }
-//     });
-// }
 
 function deleteAlarm(alarmName){
 	var deleteObject = new Parse.Object.extend("Alarm");
 	var query = new Parse.Query(deleteObject);
 	query.equalTo("alarmName", alarmName);
 	query.equalTo("userid", userid);
-	// var query2 = new Parse.Query(deleteObject);
-	// query.equalTo("alarmName", alarmName);
-	// query2.equalTo("userid", userid);
-	// var query3 = Parse.Query.or(query, query2);
+	
+	ga('send', 'event', 'Alarm', 'Delete');
+
 	query.find({
 		success: function(results) {
 			for(var i = 0; i < results.length; i++){
